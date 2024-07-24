@@ -54,11 +54,11 @@ products.forEach((product) => {
     `;
 });
 
-// console.log(productsHTML);
-
+// pulling tthe products from the products dataset and generating the HTML
 document.querySelector(".js-products-grid")
     .innerHTML = productsHTML;
 
+// adding the functionality once the add to cart butotn is clicked.
 document.querySelectorAll('.js-add-to-cart')
     .forEach((button) => {
         button.addEventListener('click', () => {
@@ -72,6 +72,8 @@ document.querySelectorAll('.js-add-to-cart')
                     matchingItem = item;
                 }
             });
+            // if the item already exists in the cart,
+            //  we need to push the updated qty, else add it to the cart
 
             if (matchingItem) {
                 matchingItem.quantity += 1;
@@ -82,6 +84,25 @@ document.querySelectorAll('.js-add-to-cart')
     
                 });
             }
+
+            let cartQuantity = 0;
+
+            // skip the first iteration as it is providing an example obeject with Undefined value. 
+            let skippedFirst = false;
+            cart.forEach((item) => {
+                if (!skippedFirst) {
+                    skippedFirst = true;
+                    return;
+                }
+                cartQuantity += item.quantity;
+            });
+
+            // updating the cart quantity on the top right onve something has been added. 
+            document.querySelector(".js-cart-quantity")
+                .innerHTML = cartQuantity;
+
+                
+            // console.log(cartQuantity);
             console.log(cart);
         });
     });
