@@ -57,7 +57,7 @@ products.forEach((product) => {
     `;
 });
 
-// pulling tthe products from the products dataset and generating the HTML
+// pulling the products from the products dataset and generating the HTML
 document.querySelector(".js-products-grid")
     .innerHTML = productsHTML;
 
