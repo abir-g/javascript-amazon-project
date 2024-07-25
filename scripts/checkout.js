@@ -4,7 +4,7 @@ import { formatCurrency } from "../utils/money.js";
 
 let cartSummaryHTML = "";
 
-console.log(cart)
+console.log(cart);
 
 let matchingProduct;
 
