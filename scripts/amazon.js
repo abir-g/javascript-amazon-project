@@ -62,17 +62,19 @@ products.forEach((product) => {
 document.querySelector(".js-products-grid")
     .innerHTML = productsHTML;
 
+updateCartQuantity();
+
 // update the cart quantity on the page 
 function updateCartQuantity () {
     let cartQuantity = 0;
 
             // skip the first iteration as it is providing an example obeject with Undefined value. 
-            let skippedFirst = false;
+            // let skippedFirst = false;
             cart.forEach((item) => {
-                if (!skippedFirst) {
-                    skippedFirst = true;
-                    return;
-                }
+                // if (!skippedFirst) {
+                //     skippedFirst = true;
+                //     return;
+                // }
                 cartQuantity += item.quantity;
             });
 

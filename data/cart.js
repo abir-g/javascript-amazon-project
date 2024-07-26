@@ -57,3 +57,14 @@ function saveToStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
     console.log("Updated in local storage")
 }
+
+export function calculateCartQuantity(params) {
+    let cartQuantity = 0;
+    cart.forEach((item) => {
+        cartQuantity += item.quantity;
+    });
+    console.log(cartQuantity);
+    return cartQuantity;
+}
+
+calculateCartQuantity();

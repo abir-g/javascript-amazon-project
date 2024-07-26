@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, calculateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 
@@ -103,15 +103,30 @@ cart.forEach((cartItem) => {
 document.querySelector(".js-order-summary")
 	.innerHTML = cartSummaryHTML;
 
+
+// functionality when delete button is clicked
 document.querySelectorAll(".js-delete-link")
 	.forEach((link) => {
 		link.addEventListener('click', () => {
 			const {productId} = link.dataset;
+
+			// remove the product from the cart JSON
 			removeFromCart(productId);
-			
-	const container = document.querySelector(`.js-class-item-container-${productId}`);
-	console.log(container)
-	container.remove();
+		
+		const container = document.querySelector(`.js-class-item-container-${productId}`);
+		console.log(container)
+		container.remove();
+
+		// update the cart quantity on the page header
+		updateCartQuantity();
 
 		});
 	});
+
+
+function updateCartQuantity () {
+	document.querySelector('.js-return-to-home-link')
+		.innerHTML = calculateCartQuantity();
+};
+
+updateCartQuantity();
