@@ -1,4 +1,4 @@
-import { cart, addToCart } from "../data/cart.js";
+import { cart, addToCart, calculateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js"
 import { formatCurrency } from "../utils/money.js";
 
@@ -66,21 +66,9 @@ updateCartQuantity();
 
 // update the cart quantity on the page 
 function updateCartQuantity () {
-    let cartQuantity = 0;
-
-            // skip the first iteration as it is providing an example obeject with Undefined value. 
-            // let skippedFirst = false;
-            cart.forEach((item) => {
-                // if (!skippedFirst) {
-                //     skippedFirst = true;
-                //     return;
-                // }
-                cartQuantity += item.quantity;
-            });
-
             // updating the cart quantity on the top right once something has been added. 
             document.querySelector(".js-cart-quantity")
-                .innerHTML = cartQuantity;
+                .innerHTML = calculateCartQuantity();
 }
 // display added to cart for 2 seconds ( broken functionality on re-click of button)
 function displayAddedToCart (productId) {
