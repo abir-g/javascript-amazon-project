@@ -56,7 +56,7 @@ export function removeFromCart (productId) {
 function saveToStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
     console.log("Updated in local storage")
-}
+};
 
 
 
@@ -71,6 +71,32 @@ export function calculateCartQuantity() {
     });
     console.log(cartQuantity);
     return cartQuantity;
-}
+};
 
 calculateCartQuantity();
+
+
+/**
+ * Updates the quantity of a specific product in the cart.
+ * 
+ * @param {string|number} productId - The unique identifier of the product to update.
+ * @param {number} newQuantity - The new quantity to set for the product.
+ * 
+ * @description
+ * This function iterates through the cart, finds the item with the matching productId,
+ * and updates its quantity. After updating, it logs the new quantity and saves the cart to storage.
+ * 
+ * @example
+ * updateQuantity('prod123', 5);
+ */
+export function updateQuantity(productId, newQuantity) {
+
+    cart.forEach((cartItem) => {
+        if (cartItem.productId === productId) {
+            cartItem.quantity = newQuantity;
+        }
+
+        console.log(cartItem.quantity);
+        saveToStorage();
+    });
+};
