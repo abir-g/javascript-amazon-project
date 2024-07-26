@@ -58,7 +58,13 @@ function saveToStorage() {
     console.log("Updated in local storage")
 }
 
-export function calculateCartQuantity(params) {
+
+
+/**
+ * Calculates the total quantity of items in the cart.
+ * @returns {number} The total quantity of items in the cart.
+ */
+export function calculateCartQuantity() {
     let cartQuantity = 0;
     cart.forEach((item) => {
         cartQuantity += item.quantity;
