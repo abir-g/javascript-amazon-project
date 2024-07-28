@@ -147,38 +147,39 @@ export function renderOrderSummary () {
 
 				// remove the product from the cart JSON
 				removeFromCart(productId);
-			
-			const container = document.querySelector(`.js-class-item-container-${productId}`);
-			console.log(container);
-			container.remove();
 
+
+      // delete the product from the page and re-render it
+      renderOrderSummary();
 			// update the cart quantity on the page header
-			updateCartQuantity();
+			updateCartQuantity('.js-return-to-home-link');
       // regenerate HTML 
       renderPaymentSummary();
       
 			});
 		});
 
-	/**
-	 * Updates the displayed cart quantity on the page.
-	 * 
-	 * This function calculates the total quantity of items in the cart
-	 * and updates the text content of the element with the class
-	 * 'js-return-to-home-link' to reflect this quantity.
-	 * 
-	 * @returns {void}
-	 * 
-	 * @example
-	 * // After adding an item to the cart
-	 * updateCartQuantity();
-	 */
-	function updateCartQuantity () {
-		document.querySelector('.js-return-to-home-link')
+  /**
+ * Updates the displayed cart quantity on the page.
+ * 
+ * This function calculates the total quantity of items in the cart
+ * and updates the innerHTML of the element with the specified class
+ * to reflect this quantity.
+ * 
+ * @param {string} className - The CSS class name of the element to update.
+ *                             Should include the leading dot (e.g., '.js-cart-quantity').
+ * @returns {void}
+ * 
+ * @example
+ * // After adding an item to the cart
+ * updateCartQuantity('.js-cart-quantity');
+ */
+	 function updateCartQuantity (className) {
+		document.querySelector(`${className}`)
 			.innerHTML = calculateCartQuantity();
 	};
 
-	updateCartQuantity();
+	updateCartQuantity('.js-return-to-home-link');
 
 	// functionality when editing quantity on checkout page
 	document.querySelectorAll('.js-update-quantity-link')
@@ -241,7 +242,8 @@ export function renderOrderSummary () {
 							container.querySelector('.quantity-label')
 								.innerHTML = newQuantity;
 							
-							updateCartQuantity();           
+							updateCartQuantity('.js-return-to-home-link');
+              renderPaymentSummary();           
 					};
 
 					link.addEventListener('click', saveQuantity);
@@ -267,6 +269,7 @@ export function renderOrderSummary () {
 			})
 		});
 }
+
 
 
 
