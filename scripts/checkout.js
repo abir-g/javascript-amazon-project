@@ -129,7 +129,19 @@ document.querySelectorAll(".js-delete-link")
 		});
 	});
 
-
+/**
+ * Updates the displayed cart quantity on the page.
+ * 
+ * This function calculates the total quantity of items in the cart
+ * and updates the text content of the element with the class
+ * 'js-return-to-home-link' to reflect this quantity.
+ * 
+ * @returns {void}
+ * 
+ * @example
+ * // After adding an item to the cart
+ * updateCartQuantity();
+ */
 function updateCartQuantity () {
 	document.querySelector('.js-return-to-home-link')
 		.innerHTML = calculateCartQuantity();
@@ -152,7 +164,7 @@ document.querySelectorAll('.js-update-quantity-link')
 
 
 
-
+/*
 document.querySelectorAll('.js-save-quantity-link')
 	.forEach((link) => {
 		link.addEventListener('click', () => {
@@ -174,3 +186,40 @@ document.querySelectorAll('.js-save-quantity-link')
 			
 		});
 	});
+*/
+
+document.querySelectorAll('.js-save-quantity-link')
+    .forEach((link) => {
+			/**
+			 * Saves the new quantity for a product in the cart and updates the UI.
+			 * @description
+			 *  This function is designed to be used as an event handler for click events
+ 			 * on elements with the class 'js-save-quantity-link'.
+			 * @requires updateQuantity - function to update the quantity in cart data.
+			 * @requires updateCartQuantity - function to update the quantity in UI. 
+			 */
+        function saveQuantity() {
+            const {productId} = link.dataset;
+            const container = document.querySelector(`.js-class-item-container-${productId}`);        
+            container.classList.remove("is-editing-quantity");
+
+            const newQuantity = Number(container.querySelector('.quantity-input').value);
+            
+            updateQuantity(productId, newQuantity);
+
+            container.querySelector('.quantity-label')
+							.innerHTML = newQuantity;
+            
+            updateCartQuantity();           
+        };
+
+        link.addEventListener('click', saveQuantity);
+
+        const quantityInput = document.querySelector(`.js-class-item-container-${link.dataset.productId} .quantity-input`);
+        quantityInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                saveQuantity();
+                event.preventDefault();
+            }
+        });
+    });
