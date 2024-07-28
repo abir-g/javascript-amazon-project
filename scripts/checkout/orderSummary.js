@@ -9,6 +9,7 @@ import { formatCurrency } from "../../utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js'
 import { renderPaymentSummary } from "./paymentSummary.js";
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 export function renderOrderSummary () {
 	let cartSummaryHTML = "";
@@ -152,34 +153,13 @@ export function renderOrderSummary () {
       // delete the product from the page and re-render it
       renderOrderSummary();
 			// update the cart quantity on the page header
-			updateCartQuantity('.js-return-to-home-link');
+      renderCheckoutHeader();
+      
       // regenerate HTML 
       renderPaymentSummary();
       
 			});
 		});
-
-  /**
- * Updates the displayed cart quantity on the page.
- * 
- * This function calculates the total quantity of items in the cart
- * and updates the innerHTML of the element with the specified class
- * to reflect this quantity.
- * 
- * @param {string} className - The CSS class name of the element to update.
- *                             Should include the leading dot (e.g., '.js-cart-quantity').
- * @returns {void}
- * 
- * @example
- * // After adding an item to the cart
- * updateCartQuantity('.js-cart-quantity');
- */
-	 function updateCartQuantity (className) {
-		document.querySelector(`${className}`)
-			.innerHTML = calculateCartQuantity();
-	};
-
-	updateCartQuantity('.js-return-to-home-link');
 
 	// functionality when editing quantity on checkout page
 	document.querySelectorAll('.js-update-quantity-link')
@@ -194,32 +174,6 @@ export function renderOrderSummary () {
 			});
 		});
 
-
-
-	/*
-	document.querySelectorAll('.js-save-quantity-link')
-		.forEach((link) => {
-			link.addEventListener('click', () => {
-				const {productId} = link.dataset;
-				// console.log(productId);
-
-				const container = document.querySelector(`.js-class-item-container-${productId}`);		
-				container.classList.remove("is-editing-quantity");
-
-				const newQuantity = Number(document.querySelector('.quantity-input').value);
-				// console.log(newQuantity);
-				
-				updateQuantity(productId, newQuantity);
-
-				document.querySelector('.quantity-label')
-					.innerHTML = newQuantity;
-				
-				updateCartQuantity();			
-				
-			});
-		});
-	*/
-
 	document.querySelectorAll('.js-save-quantity-link')
 			.forEach((link) => {
 				/**
@@ -228,7 +182,6 @@ export function renderOrderSummary () {
 				 *  This function is designed to be used as an event handler for click events
 				 * on elements with the class 'js-save-quantity-link'.
 				 * @requires updateQuantity - function to update the quantity in cart data.
-				 * @requires updateCartQuantity - function to update the quantity in UI. 
 				 */
 					function saveQuantity() {
 							const {productId} = link.dataset;
@@ -242,7 +195,7 @@ export function renderOrderSummary () {
 							container.querySelector('.quantity-label')
 								.innerHTML = newQuantity;
 							
-							updateCartQuantity('.js-return-to-home-link');
+              renderCheckoutHeader();
               renderPaymentSummary();           
 					};
 
@@ -273,4 +226,4 @@ export function renderOrderSummary () {
 
 
 
-renderOrderSummary();
+// renderOrderSummary();
