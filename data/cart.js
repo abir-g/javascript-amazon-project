@@ -103,3 +103,37 @@ export function updateQuantity(productId, newQuantity) {
         saveToStorage();
     });
 };
+
+
+/**
+ * Updates the delivery option for a specific product in the cart.
+ *
+ * @function updateDeliveryOption
+ * @param {string|number} productId - The unique identifier of the product.
+ * @param {string|number} deliveryOptionId - The id of the selected delivery option.
+ * @throws {Error} If the product is not found in the cart.
+ * 
+ * @description
+ * This function searches for a product in the cart by its ID and
+ * updates its delivery option. If the product is found, it updates
+ * the delivery option and saves the changes to storage. If the 
+ * product is not found, it throws an error.
+ * 
+ * @requires cart - An array of cart items.
+ * @requires saveToStorage - Function to persist cart changes.
+ */
+export function updateDeliveryOption(productId, deliveryOptionId) {
+    let matchingItem;
+    cart.forEach((item) => {
+        if (productId === item.productId) {
+            matchingItem = item;
+        }
+    });
+
+    if (matchingItem) {
+        matchingItem.deliveryOptionId = deliveryOptionId;
+        saveToStorage();
+    } else {
+        throw new Error(`Product with ID ${productId} not found in cart`);
+    }
+}
