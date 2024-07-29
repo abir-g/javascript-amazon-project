@@ -32,6 +32,11 @@ describe('test suite: render order summary', () => {
 
     renderOrderSummary();
   });
+
+  afterEach(() => {
+    document.querySelector('.js-test-container')
+      .innerHTML = ``;
+  });
   
   
   it('displays the cart', () => {
@@ -46,9 +51,23 @@ describe('test suite: render order summary', () => {
     expect(
       document.querySelector(`.js-product-quantity-${productId2}`).innerText
     ).toContain('Quantity: 1');
+    
+    expect(
+      document.querySelector(`.js-product-name-${productId1}`).innerText
+    ).toEqual('Black and Gray Athletic Cotton Socks - 6 Pairs');
+    
+    expect(
+      document.querySelector(`.js-product-name-${productId2}`).innerText
+    ).toEqual('Intermediate Size Basketball');
 
-    document.querySelector('.js-test-container')
-      .innerHTML = ``;
+    expect(
+      document.querySelector(`.js-product-price-${productId1}`).innerText
+    ).toEqual('$10.90');
+
+    expect(
+      document.querySelector(`.js-product-price-${productId2}`).innerText
+    ).toEqual('$20.95');
+  
   });
 
   it('removes a product', () => {
@@ -71,7 +90,13 @@ describe('test suite: render order summary', () => {
 
     expect(cart[0].productId).toEqual(productId2);
 
-    document.querySelector('.js-test-container')
-      .innerHTML = ``;
+    expect(
+      document.querySelector(`.js-product-name-${productId2}`).innerText
+    ).toEqual('Intermediate Size Basketball');
+  
+    expect(
+      document.querySelector(`.js-product-price-${productId2}`).innerText
+    ).toEqual('$20.95');
+
   });
 });
