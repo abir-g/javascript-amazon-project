@@ -195,11 +195,12 @@ export function renderOrderSummary () {
 							
 							updateQuantity(productId, newQuantity);
 
-							container.querySelector('.quantity-label')
-								.innerHTML = newQuantity;
+							// container.querySelector('.quantity-label')
+							// 	.innerHTML = newQuantity;
 							
               renderCheckoutHeader();
-              renderPaymentSummary();           
+              renderPaymentSummary();  
+              renderOrderSummary();       
 					};
 
 					link.addEventListener('click', saveQuantity);
