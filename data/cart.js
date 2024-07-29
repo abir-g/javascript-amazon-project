@@ -136,8 +136,8 @@ export function updateQuantity(productId, newQuantity) {
  * Updates the delivery option for a specific product in the cart.
  *
  * @function updateDeliveryOption
- * @param {string|number} productId - The unique identifier of the product.
- * @param {string|number} deliveryOptionId - The id of the selected delivery option.
+ * @param {string} productId - The unique identifier of the product.
+ * @param {string} deliveryOptionId - The id of the selected delivery option.
  * @throws {Error} If the product is not found in the cart.
  * 
  * @description
@@ -157,10 +157,11 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
         }
     });
 
-    if (matchingItem) {
+    if (!matchingItem) {
+        return
+        
+    } else {
         matchingItem.deliveryOptionId = deliveryOptionId;
         saveToStorage();
-    } else {
-        throw new Error(`Product with ID ${productId} not found in cart`);
     }
 }
