@@ -47,6 +47,28 @@ export function addToCart(productId, quantity) {
 
 }
 
+
+/**
+ * Removes a specific product from the cart.
+ *
+ * @function removeFromCart
+ * @param {string|number} productId - The unique identifier of the product to be removed.
+ * 
+ * @description
+ * This function creates a new cart array excluding the item with the specified productId.
+ * It then replaces the original cart with this new array and saves the updated cart to storage.
+ * 
+ * @requires cart - A global or module-level array containing cart items.
+ * @requires saveToStorage - A function that persists the cart data to storage.
+ *
+ * @example
+ * removeFromCart('product123');
+ * // Removes the product with id 'product123' from the cart and updates storage.
+ *
+ * @sideeffects
+ * - Modifies the global or module-level 'cart' variable.
+ * - Calls saveToStorage() to update persistent storage.
+ */
 export function removeFromCart (productId) {
     const newCart = [];
 
