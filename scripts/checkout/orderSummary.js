@@ -38,8 +38,9 @@ export function renderOrderSummary () {
 		if (matchingProduct) {
 			// console.log("Before using in HTML:", matchingProduct?.id);
 				cartSummaryHTML += `
-				<div class="cart-item-container 
-				js-class-item-container-${matchingProduct.id}">
+				<div class="cart-item-container
+				js-cart-item-container
+				js-cart-item-container-${matchingProduct.id}">
 					<div class="delivery-date">
 						Delivery date: ${dateString}
 					</div>
@@ -53,7 +54,8 @@ export function renderOrderSummary () {
 								<div class="product-price">
 									$${formatCurrency(matchingProduct.priceCents)}
 								</div>
-								<div class="product-quantity">
+								<div class="product-quantity
+								js-product-quantity-${matchingProduct.id}">
 									<span>
 										Quantity: <span class="quantity-label">${cartItem.quantity}</span>
 									</span>
@@ -66,7 +68,8 @@ export function renderOrderSummary () {
 									js-save-quantity-link" data-product-id= "${matchingProduct.id}">
 									Save
 									</span>
-									<span class="delete-quantity-link link-primary js-delete-link"
+									<span class="delete-quantity-link link-primary js-delete-link
+									js-delete-link-${matchingProduct.id}"
 									data-product-id= "${matchingProduct.id}">
 										Delete
 									</span>
@@ -170,7 +173,7 @@ export function renderOrderSummary () {
 			link.addEventListener('click', () => {
 				const {productId} = link.dataset;
 				// console.log(productId);
-				const container = document.querySelector(`.js-class-item-container-${productId}`);
+				const container = document.querySelector(`.js-cart-item-container-${productId}`);
 				
 				container.classList.add("is-editing-quantity");
 				
@@ -188,7 +191,7 @@ export function renderOrderSummary () {
 				 */
 					function saveQuantity() {
 							const {productId} = link.dataset;
-							const container = document.querySelector(`.js-class-item-container-${productId}`);        
+							const container = document.querySelector(`.js-cart-item-container-${productId}`);        
 							container.classList.remove("is-editing-quantity");
 
 							const newQuantity = Number(container.querySelector('.quantity-input').value);
@@ -205,7 +208,7 @@ export function renderOrderSummary () {
 
 					link.addEventListener('click', saveQuantity);
 
-					const quantityInput = document.querySelector(`.js-class-item-container-${link.dataset.productId} .quantity-input`);
+					const quantityInput = document.querySelector(`.js-cart-item-container-${link.dataset.productId} .quantity-input`);
 					quantityInput.addEventListener('keydown', (event) => {
 							if (event.key === 'Enter') {
 									saveQuantity();
