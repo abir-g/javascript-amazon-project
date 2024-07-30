@@ -155,4 +155,13 @@ describe('test suite: update delivery option', () => {
     expect(localStorage.setItem).toHaveBeenCalledTimes(0);
 
   });
+
+  it('returns nothing when deliveryOptionId is invalid', ()=> {
+    updateDeliveryOption(productId1, '5');
+
+    expect(cart.length).toEqual(2);
+    expect(cart[0].deliveryOptionId).toEqual('1');
+    expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+
+  });
 });

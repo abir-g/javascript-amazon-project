@@ -150,6 +150,12 @@ export function updateQuantity(productId, newQuantity) {
  * @requires saveToStorage - Function to persist cart changes.
  */
 export function updateDeliveryOption(productId, deliveryOptionId) {
+    const options = ['1', '2', '3'];
+    
+    if(!options.includes(deliveryOptionId)){
+        return;
+    }
+    
     let matchingItem;
     cart.forEach((item) => {
         if (productId === item.productId) {
