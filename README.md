@@ -1,0 +1,1 @@
+This is a JavaScript tutorial that I learned from and created this website using. It's an attempt at an Amazon Clone, and is the first website I have ever build without the use of no-code website editors. 
