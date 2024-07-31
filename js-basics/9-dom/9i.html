@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cart Quantity</title>
+  </head>
+  <body>
+    <button onclick="
+      console.log(`Cart quantity: ${cartQuantity}`);
+    ">Show Quantity</button>
+
+    <button onclick="
+      updateCartQuantity(1);
+    ">Add to Cart</button>
+
+    <button onclick="
+      updateCartQuantity(2);
+    ">+2</button>
+
+    <button onclick="
+      updateCartQuantity(3);
+    ">+3</button>
+
+    <button onclick="
+      updateCartQuantity(4);
+    ">+4</button>
+
+    <button onclick="
+      updateCartQuantity(5);
+    ">+5</button>
+
+    <button onclick="
+      updateCartQuantity(-1);
+    ">Remove from cart</button>
+
+    <button onclick="
+      updateCartQuantity(-2);
+    ">-2</button>
+
+    <button onclick="
+      updateCartQuantity(-3);
+    ">-3</button>
+
+    <button onclick="resetCart()">Reset Cart</button>
+
+    <p class="js-quantity"></p>
+
+    <script>
+        
+        let cartQuantity = 0
+        cartQuantity = Number(localStorage.getItem("quantity") || 0);
+        console.log(cartQuantity);
+
+        document.querySelector(".js-quantity")
+        .innerHTML = `Cart Quantity: ${cartQuantity}`;
+        
+
+      function updateCartQuantity(change) {
+        if (cartQuantity + change > 10) {
+          alert('The cart is full');
+          return;
+        }
+
+        if (cartQuantity + change < 0) {
+          alert('Not enough items in the cart');
+          return;
+        }
+
+        cartQuantity += change;
+        console.log(`Cart quantity: ${cartQuantity}`);
+
+        document.querySelector(".js-quantity")
+        .innerHTML = `Cart Quantity: ${cartQuantity}`;
+        localStorage.setItem("quantity",cartQuantity.toString());
+        console.log("Updated localStorage with new cart quantity:", cartQuantity);
+        console.log(localStorage.getItem("quantity"))
+
+      }
+
+      function resetCart (){
+        cartQuantity = 0;
+        document.querySelector(".js-quantity")
+        .innerHTML = `Cart Quantity: ${cartQuantity}`;
+
+        localStorage.setItem("quantity",cartQuantity.toString());
+        console.log("Updated localStorage with new cart quantity:", cartQuantity);
+        // localStorage.setItem("quantity",cartQuantity.toString());
+
+      }
+
+    //   localStorage.setItem("quantity",toString(cartQuantity));
+
+    </script>
+  </body>
+</html>

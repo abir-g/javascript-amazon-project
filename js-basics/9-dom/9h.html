@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9h Exercise</title>
+</head>
+<body>
+    <input class="js-input"placeholder="Type something" onkeyup="displayText()">
+    <p class="js-display-text"></p>
+
+
+    <script>
+        function displayText(){
+            const inputElement = document.querySelector('.js-input');
+            let text = inputElement.value;
+
+            document.querySelector('.js-display-text')
+            .innerHTML = `${text}`;
+        };
+    </script>
+</body>
+</html>

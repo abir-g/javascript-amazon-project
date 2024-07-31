@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function convertTemperature(degrees, unit){
+            let converted = ''
+            let newUnit = ''
+            
+            unit === 'C'?converted = (degrees * 9/5) +32:converted = (degrees - 32) * 5/9
+
+            // if (unit === 'C'){
+            //     converted = (degrees * 9/5) +32
+            //     newUnit = 'F'
+            // }
+            // else if(unit === 'F'){
+            //     converted = (degrees - 32) * 5/9
+            //     newUnit = 'C'
+            // }
+            return `${converted}`
+        }
+        console.log(convertTemperature(86, 'C'))
+    </script>
+</body>
+</html>

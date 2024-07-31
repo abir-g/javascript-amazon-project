@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11h</title>
+</head>
+<body>
+    <script>
+        function findIndex(array, target){
+
+            for(let i = 0; i<array.length; i++){
+                const word = array[i];
+
+                if(word === target){
+                    return i;
+                }
+            }
+
+            return -1;
+
+        }
+        console.log(findIndex(['green', 'red', 'blue', 'red'], 'red'))
+
+
+        function removeEggs(foods){
+
+            const foodsCopy = foods.slice();
+            const foodsReversed = foodsCopy.reverse();
+            console.log(foodsReversed)
+
+            const result = [];
+            let counter = 0;
+            
+            for (let i = 0; i < foodsReversed.length ; i++){
+                if(foodsReversed[i] === 'egg' && counter < 2){
+                counter++;
+                continue;
+                } 
+                
+                result.push(foodsReversed[i]);
+                
+            }
+            return result.reverse();
+        }
+
+        console.log(removeEggs(['egg', 'apple', 'egg', 'egg', 'ham']))
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercuse 12c</title>
+</head>
+<body>
+
+    <button class="js-button" onclick="changeButton();">Start</button>
+    <button class="js-add-to-cart-button" onclick="addToCart();">Add to Cart</button>
+    <p class="js-add-to-cart-message"></p>
+    <script>
+        function changeButton(){
+            const buttonElement = document.querySelector('.js-button');
+            buttonElement.innerHTML = 'Loading...'
+
+            setTimeout(function(){
+                buttonElement.innerHTML = "Finished";
+
+            }, 1000);
+            
+        }
+
+        let timeoutID;
+
+        function addToCart(){
+            
+            const messageElement = document.querySelector('.js-add-to-cart-message');
+            messageElement.innerHTML = "Added";
+            
+            clearTimeout(timeoutID)
+
+            timeoutID = setTimeout(function(){
+                messageElement.innerHTML = "";
+                isClicked = false;
+            }, 2000);
+            
+        }
+    </script>
+</body>
+</html>

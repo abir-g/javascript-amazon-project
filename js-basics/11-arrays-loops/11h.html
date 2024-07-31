@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    function addOne(arr){
+        for(i=0; i<arr.length; i++ ){
+            arr[i] = arr[i] + 1;
+            }
+            console.log(arr);
+            return arr;
+        }
+
+        addOne([1, 2, 3]);
+
+
+        function addNum(arr, num){
+            for(i=0; i<arr.length; i++){
+                arr[i] = arr[i] + num;
+            }
+            
+            console.log(arr);
+            return arr;
+        }
+
+        addNum([1,2,3], 3);
+
+        function countPositive(nums){
+            let counter = 0;
+            for (i=0; i<nums.length; i++){
+                if (nums[i]>0){;
+                    counter += 1;
+                }
+            }
+            console.log(counter);
+            return counter;
+        }
+
+        countPositive([1, -3, 5 ]);
+
+        function minMax(nums){
+            results = {
+                min : 0,
+                max : 0
+            };
+
+            for (i=0; i<nums.length; i++){
+                
+                const value = nums[i];
+
+                if(value>results.max){
+                    results.max = value;
+                }
+
+                if(value<results.min){
+                    results.min = value;
+                }
+
+            }
+            console.log(results)
+            return results
+        }
+
+        minMax([-2, 3, -5, 7, 10]);
+
+
+        function countWords(words){
+            const results = {};
+
+            for(i=0;i<words.length;i++){
+                const word = words[i];
+
+                if(!results[word]){
+                    results[word] = 1;
+                }
+                else{
+                    results[word]++;
+                }
+            }
+            console.log(results);
+            return results;
+            
+        }
+        countWords(['apple', 'grape', 'apple', 'apple'])
+        
+    </script>
+    
+</body>
+</html>
+
+
+

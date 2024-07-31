@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom exercises</title>
+</head>
+<body>
+    <input class="js-name" placeholder="name..." onkeydown="handleOnKeyDown(event)">
+    <button class="js-submit" onclick="submitName()">submit</button>
+    <p class="js-display-name"></p>
+
+
+    <script>
+        function submitName(){
+            const inputElement = document.querySelector('.js-name');
+            name = inputElement.value;
+
+            document.querySelector('.js-display-name')
+            .innerHTML = `Your name is ${name}` 
+        }
+
+        function handleOnKeyDown(event){
+            if (event.key === 'Enter'){
+                submitName()
+            }
+        }
+    </script>
+</body>
+</html>
