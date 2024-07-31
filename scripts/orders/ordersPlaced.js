@@ -5,12 +5,12 @@ import formatCurrency from "../../utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 import { addToCart, calculateCartQuantity } from "../../data/cart.js";
 
-function formatDate(dateString) {
+export function formatDate(dateString) {
   return dayjs(dateString).format('MMMM D');
 }
 
 // update the cart quantity on the page 
-function updateCartQuantity () {
+export function updateCartQuantity () {
   // updating the cart quantity on the top right once something has been added. 
   document.querySelector(".js-cart-quantity")
       .innerHTML = calculateCartQuantity();
@@ -80,7 +80,7 @@ export function renderOrderPlaced () {
             </div>
 
             <div class="product-actions">
-              <a href="tracking.html">
+              <a href="tracking.html?orderId=${orderId}&productId=${product.productId}">
                 <button class="track-package-button button-secondary">
                   Track package
                 </button>
@@ -113,6 +113,7 @@ export function renderOrderPlaced () {
             <span class="buy-again-message">Buy it again</span>
           `;
         }, 1000);
+
       });
     });
 
