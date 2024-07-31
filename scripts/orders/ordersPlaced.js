@@ -3,19 +3,24 @@ import { orders } from "../../data/orders.js";
 import { loadProductsFetch } from "../../data/products.js";
 import formatCurrency from "../../utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
-
+import { addToCart, calculateCartQuantity } from "../../data/cart.js";
 
 function formatDate(dateString) {
   return dayjs(dateString).format('MMMM D');
 }
 
+// update the cart quantity on the page 
+function updateCartQuantity () {
+  // updating the cart quantity on the top right once something has been added. 
+  document.querySelector(".js-cart-quantity")
+      .innerHTML = calculateCartQuantity();
+    }
+
 
 export function renderOrderPlaced () {
-  
-  let orderPlacedHTML = '';
-  let orderPlacedHeader = '';
-  let orderPlacedBody = '';
+  updateCartQuantity();
 
+  let orderPlacedHTML = '';
 
   orders.forEach((order) => {
     console.log(order);
@@ -24,7 +29,7 @@ export function renderOrderPlaced () {
     const orderDate = formatDate(order.orderTime);
     const totalCost = formatCurrency(order.totalCostCents); 
     
-    orderPlacedHeader += `
+    orderPlacedHTML += `
         <div class="order-header">
           <div class="order-header-left-section">
             <div class="order-date">
@@ -52,9 +57,8 @@ export function renderOrderPlaced () {
       // console.log(matchingProduct);
 
       
-      orderPlacedBody += `
+      orderPlacedHTML += `
           <div class="order-details-grid">
-            <div class= "js-matching-product-container">
               <div class="product-image-container">
                 <img src="${matchingProduct.image}">
               </div>
@@ -62,14 +66,14 @@ export function renderOrderPlaced () {
                 <div class="product-name">
                   ${matchingProduct.name}
                 </div>
-            </div>
               <div class="product-delivery-date">
                 Arriving on: ${arrivingOn}
               </div>
               <div class="product-quantity">
                 Quantity: ${quantity}
               </div>
-              <button class="buy-again-button button-primary">
+              <button class="buy-again-button button-primary js-buy-again"
+                data-product-id= "${matchingProduct.id}">
                 <img class="buy-again-icon" src="images/icons/buy-again.png">
                 <span class="buy-again-message">Buy it again</span>
               </button>
@@ -87,14 +91,30 @@ export function renderOrderPlaced () {
 
     });
 
-    orderPlacedHTML = orderPlacedHeader + orderPlacedBody;
-    console.log(orderPlacedHTML);
-
   });
 
   
-  // document.querySelector('.')
+  document.querySelector('.js-order-container')
+    .innerHTML = orderPlacedHTML;
 
+  document.querySelectorAll('.js-buy-again')
+    .forEach((button) => {
+
+      button.addEventListener('click', () => {
+        const {productId} = button.dataset;
+
+        addToCart(productId, 1);
+        updateCartQuantity();
+
+        button.innerHTML = 'Added';
+        setTimeout(() => {
+          button.innerHTML = `
+            <img class="buy-again-icon" src="images/icons/buy-again.png">
+            <span class="buy-again-message">Buy it again</span>
+          `;
+        }, 1000);
+      });
+    });
 
 
 }
