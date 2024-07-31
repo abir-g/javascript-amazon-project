@@ -1,5 +1,11 @@
 import formatCurrency from "../utils/money.js";
 
+/**
+ * Retrieves a product by its ID from the products array.
+ *
+ * @param {string} productId - The ID of the product to retrieve.
+ * @returns {Object|undefined} The matching product object, or undefined if no match is found.
+ */
 export function getProduct (productId) {
    
   let matchingProduct;
